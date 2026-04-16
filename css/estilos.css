@@ -1104,3 +1104,122 @@ input[name="filtro"] {
         padding: 40px 20px;
     }
 }
+
+/* --- PÁGINA DE PRECIOS (OPTIMIZADA) --- */
+
+.precios-page {
+    padding-top: 80px; /* Subimos el contenido para que no quede tan lejos del navbar */
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.precios-page h2 {
+    color: var(--color-primario);
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.tabla-wrapper {
+    margin-top: 30px;
+    overflow-x: auto; /* Mantiene la tabla navegable en celulares */
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.tabla-precios {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla-precios th, 
+.tabla-precios td {
+    padding: 18px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+}
+
+.tabla-precios th {
+    background-color: var(--color-primario);
+    color: white;
+    font-size: 1.1rem;
+}
+
+/* Efecto de resaltado suave sin mover la tabla */
+.tabla-precios tbody tr:hover {
+    background-color: #fffaf4; 
+    transition: background-color 0.2s;
+}
+
+.fila-precio {
+    font-weight: bold;
+    color: var(--color-primario);
+    font-size: 1.2rem;
+}
+
+/* --- TOOLTIPS CORREGIDOS (ALINEACIÓN IZQUIERDA PARA QUE NO SE SALGA) --- */
+
+.info-tooltip {
+    position: relative;
+    cursor: help;
+    color: #555;
+    display: inline-block;
+}
+
+.info-tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 130%; 
+    /* En lugar de left: 50%, lo alineamos al inicio del icono */
+    left: 0; 
+    transform: translateY(10px); /* Quitamos el translateX(-50%) para que no se mueva a la izquierda */
+    
+    background-color: #333;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    
+    /* Manejo de ancho para que no se desborde */
+    min-width: 180px; 
+    max-width: 250px;
+    white-space: normal; /* Permitimos que el texto use varias líneas si es largo */
+    line-height: 1.4;
+    text-align: left;
+    
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 100;
+    pointer-events: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Triángulo del tooltip ajustado a la izquierda */
+.info-tooltip::before {
+    content: "";
+    position: absolute;
+    bottom: 115%;
+    left: 10px; /* Alineado con el inicio del texto */
+    border: 6px solid transparent;
+    border-top-color: #333;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    z-index: 100;
+}
+
+/* Activación */
+.info-tooltip:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.info-tooltip:hover::before {
+    opacity: 1;
+    visibility: visible;
+}
