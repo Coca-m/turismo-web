@@ -1223,3 +1223,236 @@ input[name="filtro"] {
     opacity: 1;
     visibility: visible;
 }
+
+/* --- BLOG "¿QUÉ PASA EN JUJUY?" (VERSIÓN FINAL CONSOLIDADA) --- */
+
+.blog-revista {
+    padding-top: 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 100px;
+}
+
+.diario-logo {
+    font-family: 'Playfair Display', 'Georgia', serif;
+    font-size: 3.5rem;
+    color: #1a1a1a;
+    text-align: center;
+    border-bottom: 4px double var(--color-primario);
+    padding-bottom: 10px;
+    margin-bottom: 5px;
+}
+
+.diario-fecha {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #666;
+    text-transform: capitalize;
+    margin-bottom: 40px;
+}
+
+.filter-section { width: 100%; }
+
+.filter-labels {
+    margin: 20px 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+    text-align: center;
+}
+
+.filter-labels label {
+    margin: 0 15px;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    transition: color 0.3s;
+    color: #555;
+}
+
+/* --- GRILLA PRINCIPAL --- */
+.revista-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    /* Creamos filas automáticas pequeñas para que las noticias se acomoden mejor */
+    grid-auto-rows: min-content; 
+    gap: 30px;
+    width: 100% !important;
+    grid-auto-flow: dense !important; /* Obligatorio para rellenar huecos */
+    align-items: start;
+}
+
+/* --- TARJETA BASE (Mantenemos tus efectos originales) --- */
+.art-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.art-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    border-color: var(--color-primario);
+}
+
+/* --- LA NOTICIA PRINCIPAL (ESTILO NEWSLETTER) --- */
+.art-card.principal {
+    grid-column: 1 / 3 !important;
+    grid-row: span 2 !important; /* Volvemos a poner el span 2 para reservar el hueco derecho */
+    height: auto !important;
+}
+
+.art-img {
+    width: 100%;
+    height: 220px;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.6s ease;
+}
+
+/* Imagen más grande para la portada */
+.art-card.principal .art-img {
+    height: 520px !important; /* Aumentamos aquí para cerrar el espacio blanco */
+    width: 100% !important;
+}
+
+.art-card:not(.principal) {
+    grid-row: span 1; /* Ocupan solo un lugar */
+    height: auto !important;
+}
+
+/* Esto afecta a todas las noticias MENOS a la principal */
+.art-card:not(.principal) .art-body {
+    flex-grow: 0; 
+    padding: 15px; /* Les damos un poquito menos de espacio interno para que quepan mejor */
+}
+
+/* Y esto asegura que la imagen de las chiquitas no se estire raro */
+.art-card:not(.principal) .art-img {
+    height: 160px !important; /* Un poco más bajas para ayudar al equilibrio */
+}
+
+.art-card:hover .art-img { transform: scale(1.08); }
+
+.art-body {
+    padding: 20px;
+    flex-grow: 1;
+    box-sizing: border-box;
+}
+
+.art-card.principal .tag {
+    align-self: flex-start; /* Hace que el tag solo ocupe su ancho de texto */
+    margin-bottom: 15px;    /* Separa el tag del título */
+    font-size: 0.8rem;      /* Un poquito más grande para la principal */
+}
+
+.art-card.principal .art-body {
+    padding: 30px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Alinea todo al principio */
+}
+
+.art-card.principal .autor {
+    margin-top: auto; /* Empuja el nombre del autor al final si sobra espacio */
+    padding-top: 10px;
+    font-size: 0.85rem;
+    color: #888;
+}
+
+
+/* Títulos diferenciados */
+.art-card h3, .art-card h2 { margin: 10px 0; line-height: 1.2; }
+.art-card.principal h2 { font-size: 2.2rem; }
+
+.tag {
+    background: var(--color-primario);
+    color: #fff;
+    padding: 4px 10px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+/* --- FILTRADO --- */
+input[type="radio"] { display: none; }
+
+#cultura:checked ~ .revista-grid article:not(.cultura),
+#aventura:checked ~ .revista-grid article:not(.aventura),
+#gastronomia:checked ~ .revista-grid article:not(.gastronomia) {
+    display: none;
+}
+
+#cultura:checked ~ .filter-labels label[for="cultura"],
+#aventura:checked ~ .filter-labels label[for="aventura"],
+#gastronomia:checked ~ .filter-labels label[for="gastronomia"],
+#all:checked ~ .filter-labels label[for="all"] {
+    color: var(--color-primario);
+}
+
+/* --- ANIMACIONES --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- COMENTARIOS Y AVATARES (Diseño original respetado) --- */
+.comentarios-box {
+    margin-top: 60px;
+    border-top: 2px solid #eee;
+    padding-top: 40px;
+}
+
+.comentario {
+    display: flex;
+    gap: 15px;
+    margin: 25px 0;
+    padding: 20px;
+    background: #fdfdfd;
+    border-radius: 12px;
+    border-left: 5px solid var(--color-primario);
+}
+
+.avatar-css {
+    width: 50px; height: 50px;
+    background: #ddd;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.avatar-css::before {
+    content: ""; position: absolute;
+    width: 20px; height: 20px;
+    background: #aaa; border-radius: 50%;
+    top: 10px; left: 15px;
+}
+
+.avatar-css::after {
+    content: ""; position: absolute;
+    width: 38px; height: 28px;
+    background: #aaa; border-radius: 50%;
+    bottom: -10px; left: 6px;
+}
+
+.avatar-c2 { background: #d1f2eb; } .avatar-c2::before, .avatar-c2::after { background: #16a085; }
+.avatar-c3 { background: #fef9e7; } .avatar-c3::before, .avatar-c3::after { background: #f1c40f; }
+.avatar-c4 { background: #ebf5fb; } .avatar-c4::before, .avatar-c4::after { background: #3498db; }
+.avatar-c5 { background: #f4ecf7; } .avatar-c5::before, .avatar-c5::after { background: #8e44ad; }
+
+.comentario-content strong { display: block; margin-bottom: 5px; }
+.comentario-content p { color: #666; font-size: 0.95rem; }
